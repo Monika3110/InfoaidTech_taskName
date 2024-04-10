@@ -1,0 +1,185 @@
+package com.example.calculatorapp;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
+import android.os.Bundle;
+import android.renderscript.ScriptC;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.mozilla.javascript.Context;
+import org.mozilla.javascript.Script;
+import org.mozilla.javascript.Scriptable;
+
+public class MainActivity extends AppCompatActivity {
+    Button one,two,three,four,five,six,seven,eight,nine,cbtn,ac,zero,dot,plus,minus,div,mul,equals;
+    TextView t1,t2;
+    String data;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        TextView t1 = findViewById(R.id.t1);
+        TextView t2 = findViewById(R.id.t2);
+        Button ac = findViewById(R.id.ac);
+        Button cbtn = findViewById(R.id.cbtn);
+        Button div = findViewById(R.id.div);
+        Button mul = findViewById(R.id.mul);
+        Button plus = findViewById(R.id.plus);
+        Button minus = findViewById(R.id.minus);
+        Button equals = findViewById(R.id.equals);
+        Button zero = findViewById(R.id.zero);
+        Button dot = findViewById(R.id.dot);
+        Button one = findViewById(R.id.one);
+        Button two = findViewById(R.id.two);
+        Button three = findViewById(R.id.three);
+        Button four = findViewById(R.id.four);
+        Button five = findViewById(R.id.five);
+        Button six = findViewById(R.id.six);
+        Button seven = findViewById(R.id.seven);
+        Button eight = findViewById(R.id.eight);
+        Button nine = findViewById(R.id.nine);
+
+        zero.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                data = t1.getText().toString();
+                t1.setText(data + "0");
+            }
+        });
+        one.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                data = t1.getText().toString();
+                t1.setText(data + "1");
+            }
+        });
+        two.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                data = t1.getText().toString();
+                t1.setText(data + "2");
+            }
+        });
+        three.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                data = t1.getText().toString();
+                t1.setText(data + "3");
+            }
+        });
+        four.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                data = t1.getText().toString();
+                t1.setText(data + "4");
+            }
+        });
+        five.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                data = t1.getText().toString();
+                t1.setText(data + "5");
+            }
+        });
+        six.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                data = t1.getText().toString();
+                t1.setText(data + "6");
+            }
+        });
+        seven.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                data = t1.getText().toString();
+                t1.setText(data + "7");
+            }
+        });
+        eight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                data = t1.getText().toString();
+                t1.setText(data + "8");
+            }
+        });
+        nine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                data = t1.getText().toString();
+                t1.setText(data + "9");
+            }
+        });
+        cbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                data = t1.getText().toString();
+                t1.setText(data.substring(0, data.length() - 1));
+            }
+        });
+        ac.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                t1.setText("");
+                t2.setText("0");
+            }
+        });
+        dot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                data = t1.getText().toString();
+                t1.setText(data + ".");
+            }
+        });
+        plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                data = t1.getText().toString();
+                t1.setText(data + "+");
+            }
+        });
+        minus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                data = t1.getText().toString();
+                t1.setText(data + "-");
+            }
+        });
+        mul.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                data = t1.getText().toString();
+                t1.setText(data + "*");
+            }
+        });
+        div.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                data = t1.getText().toString();
+                t1.setText(data + "/");
+            }
+        });
+        equals.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                data = t1.getText().toString();
+                Context c = Context.enter();
+                c.setOptimizationLevel(-1);
+                String finalres="";
+                Scriptable scriptable=c.initStandardObjects();
+                finalres=c.evaluateString(scriptable,data,"Javascript",1,null).toString();
+                t2.setText(finalres);
+                if(finalres.equals("Infinity")){
+                    t2.setText("=can't divide by zero");
+                }
+            }
+        });
+
+
+    }
+    }
